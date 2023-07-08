@@ -13,13 +13,12 @@ class UserModuleTest extends TestCase
      *
      * @return void
      */
-    public function test_creates_a_new_user():void
+    public function test_creates_a_new_user(): void
     {
-        $this->post(route('user.store'),[
-            'name'=>'',
-            'email'=>'',
-            'password'=>'',
+        $this->post(route('user.store'), [
+            'name' => '',
+            'email' => '',
+            'password' => '',
         ])->assertSee('Procesando informacion');
-
     }
 }

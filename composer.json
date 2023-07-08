@@ -19,7 +19,8 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +36,8 @@
         }
     },
     "scripts": {
+        "phpcs": "./vendor/bin/phpcs",
+        "phpcbf": "./vendor/bin/phpcbf",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -61,7 +64,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        "disable-tls": true,
+        "secure-http": false
     },
     "minimum-stability": "stable",
     "prefer-stable": true

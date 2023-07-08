@@ -4,6 +4,7 @@ namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Config;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -12,17 +13,9 @@ class UserServiceProvider extends ServiceProvider
      */
     protected $moduleName = 'User';
 
-    /**
-     * @var string $moduleNameLower
-     */
-    protected $moduleNameLower = 'user';
+    protected string $moduleNameLower = 'user';
 
-    /**
-     * Boot the application events.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -30,37 +23,22 @@ class UserServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
     }
 
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
+
+    protected function registerConfig(): void
     {
         $this->publishes([
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
-    /**
-     * Register views.
-     *
-     * @return void
-     */
-    public function registerViews()
+
+    public function registerViews(): void
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
@@ -73,12 +51,8 @@ class UserServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
+
+    public function registerTranslations(): void
     {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
@@ -91,12 +65,7 @@ class UserServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
+    public function provides(): array
     {
         return [];
     }
@@ -104,7 +73,7 @@ class UserServiceProvider extends ServiceProvider
     private function getPublishableViewPaths(): array
     {
         $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
+        foreach (Config::get('view.paths') as $path) {
             if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
                 $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
