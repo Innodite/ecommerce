@@ -22,8 +22,8 @@
     },
     "autoload": {
         "psr-4": {
+            "Modules\\": "Modules/" ,
             "App\\": "app/",
-            "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
@@ -34,6 +34,8 @@
         }
     },
     "scripts": {
+        "phpcs": "./vendor/bin/phpcs",
+        "phpcbf": "./vendor/bin/phpcbf",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
