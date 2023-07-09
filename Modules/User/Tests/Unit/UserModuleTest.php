@@ -8,11 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserModuleTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
     public function test_creates_a_new_user(): void
     {
         $this->post(route('user.store'), [
