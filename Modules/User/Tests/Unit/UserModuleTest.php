@@ -10,7 +10,7 @@ class UserModuleTest extends TestCase
 {
     public function test_creates_a_new_user(): void
     {
-        $this->post(route('user.store'), [
+        $this->post(route('users.store'), [
             'name' => '',
             'email' => '',
             'password' => '',
