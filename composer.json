@@ -34,8 +34,8 @@
         }
     },
     "scripts": {
-        "phpcs": "./vendor/bin/phpcs",
-        "phpcbf": "./vendor/bin/phpcbf",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
