@@ -12,7 +12,7 @@ class UserModuleTest extends TestCase
 
     public function test_creates_a_new_user(): void
     {
-       $user = $this->post('users', [
+       $user = $this->post('/users', [
             'name' => 'Anthony',
             'email' => 'anthonyfilgueira@hotmail.com',
             'password' => '123456',
