@@ -12,12 +12,10 @@ class UserModuleTest extends TestCase
 
     public function test_creates_a_new_user(): void
     {
-       $user = $this->post(route('users.store'), [
+       $user = $this->post('users', [
             'name' => 'Anthony',
             'email' => 'anthonyfilgueira@hotmail.com',
             'password' => '123456',
-        ]);
-
-        dd($user);
+        ])->assertSee('user.save');
     }
 }
