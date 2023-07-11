@@ -12,7 +12,8 @@ class UserController extends Controller
 {
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository){
+    public function __construct(UserRepository $userRepository)
+    {
 
         $this->userRepository = $userRepository;
     }
@@ -44,8 +45,8 @@ class UserController extends Controller
         $user = $this->userRepository->store($request->validated());
 
         $data = [
-            'user'=>$user,
-            'message'=>trans('user.save')
+            'user' => $user,
+            'message' => trans('user.save')
         ];
         return response()->json($data, 200);
     }
