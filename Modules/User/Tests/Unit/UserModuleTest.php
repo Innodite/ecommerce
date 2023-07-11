@@ -8,12 +8,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_creates_a_new_user(): void
     {
-        $this->post('/users', [
-            'name' => '',
-            'email' => '',
-            'password' => '',
-        ])->assertSee('Procesando informacion');
+       $user = $this->post(route('users.store'), [
+            'name' => 'Anthony',
+            'email' => 'anthonyfilgueira@hotmail.com',
+            'password' => '123456',
+        ]);
+
+        dd($user);
     }
 }
