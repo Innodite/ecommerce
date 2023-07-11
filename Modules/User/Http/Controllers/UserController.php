@@ -2,12 +2,20 @@
 
 namespace Modules\User\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\User\Repositories\UserRepository;
+use Modules\User\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository){
+
+        $this->userRepository = $userRepository;
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -31,9 +39,15 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        return 'Procesando informacion';
+        $user = $this->userRepository->store($request->validated());
+
+        $data = [
+            'user'=>$user,
+            'message'=>trans('user.save')
+        ];
+        return response()->json($data, 200);
     }
 
     /**
